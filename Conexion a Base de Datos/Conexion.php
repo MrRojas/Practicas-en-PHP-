@@ -1,9 +1,9 @@
 <?php 
 
- const USER = "root";
- const PASS = "123";
+ const USER = "postgre";
+ const PASS = "12345678";
  const HOST = "localhost";
- const DATABASE = "MyDB";
+ const DATABASE = "mandito";
 
 abstract class Modelo{
 
@@ -68,7 +68,7 @@ abstract class Modelo{
 				return $registros;
 					// captura el error 
 				}catch(Exception $e){  
-					
+					echo $e;
 					return -1;  // codigo Error
 				}
 
@@ -79,7 +79,7 @@ abstract class Modelo{
 		public function get_all(){
 
 				//Creamos el sql
-				$this->sql= "SELECT * FROM {$this->tabla}";
+				$this->sql= "SELECT id, descripcion FROM public.usuarios";
 				return $this->consult();
 			
 		}
@@ -105,5 +105,22 @@ abstract class Modelo{
 
 		
 	}
+
+
+	class Ar extends Modelo
+	{
+		public function __construct($ar){
+
+			$this->tabla = $ar; 
+		}
+		
+	}
+
+	$ar = new Ar("usuarios");
+
+
+	var_dump($ar->get_all());
+
+
 
  ?>
